@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ChuckNorris;
 
 namespace ChuckNorrisWPF
 {
@@ -20,9 +21,22 @@ namespace ChuckNorrisWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        ChuckNorrisQuotes _chuckNorrisQuotes = new ChuckNorrisQuotes();
+
         public MainWindow()
         {
             InitializeComponent();
+            UpdateWithNextQuote();
+        }
+
+        private void UpdateWithNextQuote()
+        {
+            CurrentQuote.Text = _chuckNorrisQuotes.GetNextQuote();
+        }
+
+        private void NextQuote(object sender, RoutedEventArgs e)
+        {
+            UpdateWithNextQuote();
         }
     }
 }
