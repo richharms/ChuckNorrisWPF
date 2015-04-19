@@ -1,7 +1,12 @@
 ﻿<Window x:Class="ChuckNorrisWPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vms="clr-namespace:ChuckNorris;assembly=ChuckNorris"
+        xmlns:oxy="http://oxyplot.org/wpf"
         Title="Chuck Norris" Height="350" Width="525">
+    <Window.DataContext>
+        <vms:ChuckNorrisActions/>
+    </Window.DataContext>
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="294" Margin="10,10,0,0" VerticalAlignment="Top" Width="491">
             <TabItem Header="Quotes" Height="22" Margin="-2,-2,-2.5,0" VerticalAlignment="Bottom">
@@ -15,7 +20,14 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Graph">
-                <Grid Background="White"/>
+                <Grid Background="White">
+                    <oxy:Plot Title="{Binding Title}">
+                        <oxy:Plot.Series>
+                            <oxy:LineSeries ItemsSource="{Binding Punches}" Title="Punches"/>
+                            <oxy:LineSeries ItemsSource="{Binding Kicks}" Title="Kicks"/>
+                        </oxy:Plot.Series>
+                    </oxy:Plot>
+                </Grid>
             </TabItem>
         </TabControl>
 
